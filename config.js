@@ -1,6 +1,10 @@
 const dotenv = require('dotenv');
 
-dotenv.config();
+const result = dotenv.config();
+
+if (result.error) {
+  throw new Error('Unable to parse environment variables.');
+}
 
 module.exports = {
   port: process.env.DB_PORT,
