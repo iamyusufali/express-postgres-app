@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon -r dotenv/config server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "pg": "^8.7.1"
   },
   "devDependencies": {
+    "dotenv": "^10.0.0",
     "nodemon": "^2.0.13"
   }
 }

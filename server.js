@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-const dbQueries = require('./queries');
+const dbQueries = require('./database/queries');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

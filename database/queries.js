@@ -1,11 +1,13 @@
 const Pool = require('pg').Pool;
 
+const { port, user, host, database, password } = require('../config');
+
 const pool = new Pool({
-  user: 'me',
-  host: 'localhost',
-  database: 'api',
-  password: 'password',
-  port: 5432,
+  user,
+  host,
+  database,
+  password,
+  port,
 });
 
 const getUsers = (request, response) => {
