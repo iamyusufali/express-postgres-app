@@ -7,6 +7,7 @@ const dbQueries = require('./database/queries');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', dbQueries.getUsers);
+app.get('/users', dbQueries.getUsers);
+app.get('/users/:id', dbQueries.getUserById);
 
 app.listen(PORT, () => console.log(`Server running at Port: ${PORT}`));
