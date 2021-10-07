@@ -28,7 +28,23 @@ const getUserById = (request, response) => {
   });
 };
 
-module.exports = {
-  getUsers,
-  getUserById,
+const createNewUser = (request, response) => {
+  const name = request.body.name;
+  const email = request.body.email;
+
+  if (!name || !email) {
+    return response.status(406).send('name and email fields are mandatory');
+  }
+
+  const dbQuery = 'INSERT INTO users (name, email) VALUES ($1, $2)';
+
+  pool.query(dbQuery, [name, email], (error, result) => {
+    if (error) throw error;
+
+    console.log(result);
+
+    response.status(201).json(result);
+  });
 };
+
+module.exports = { getUsers, getUserById, createNewUser };
