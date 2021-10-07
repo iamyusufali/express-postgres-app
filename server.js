@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.SERVER_PORT;
+
+const { serverPort } = require('./config');
 
 const dbQueries = require('./database/queries');
 
@@ -10,5 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/users', dbQueries.getUsers);
 app.get('/users/:id', dbQueries.getUserById);
 app.post('/user', dbQueries.createNewUser);
+app.put('/user/:id', dbQueries.updateUser);
 
-app.listen(PORT, () => console.log(`Server running at Port: ${PORT}`));
+app.listen(serverPort, () =>
+  console.log(`Server running at Port: ${serverPort}`)
+);
