@@ -2,21 +2,21 @@ require('dotenv').config();
 
 const Pool = require('pg').Pool;
 
-// const {
-//   pgUser,
-//   pgPassword,
-//   pgHost,
-//   pgPort,
-//   pgDatabase,
-//   nodeEnv,
-//   databaseUrl,
-// } = require('../config');
+const {
+  pgUser,
+  pgPassword,
+  pgHost,
+  pgPort,
+  pgDatabase,
+  nodeEnv,
+  databaseUrl,
+} = require('../config');
 
-const isProduction = process.env.NODE_ENV === 'production';
-// const connectionString = `postgresql://${pgUser}:${pgPassword}@${pgHost}:${pgPort}/${pgDatabase}`;
+const isProduction = nodeEnv === 'production';
+const connectionString = `postgresql://${pgUser}:${pgPassword}@${pgHost}:${pgPort}/${pgDatabase}`;
 
 const poolConfig = {
-  connectionString: process.env.DATABASE_URL,
+  connectionString: isProduction ? databaseUrl : connectionString,
   ...(isProduction && {
     ssl: {
       rejectUnauthorized: false,
@@ -57,7 +57,7 @@ const createNewUser = (request, response) => {
   pool.query(dbQuery, [name, email], (error, result) => {
     if (error) throw error;
 
-    response.status(201).json(result);
+    response.status(201).json(`New User has been created successfully.`);
   });
 };
 
