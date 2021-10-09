@@ -7,10 +7,12 @@ if (result.error) {
 }
 
 module.exports = {
-  port: process.env.DB_PORT,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  pgPort: process.env.PG_PORT,
+  pgHost: process.env.PG_HOST,
+  pgDatabase: process.env.PG_DATABASE,
+  pgUser: process.env.PG_USER,
+  pgPassword: process.env.PG_PASSWORD,
   serverPort: process.env.SERVER_PORT,
+  nodeEnv: process.env.NODE_ENV,
+  databaseUrl: process.env.DATABASE_URL,
 };
