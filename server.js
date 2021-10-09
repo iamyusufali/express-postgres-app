@@ -6,52 +6,54 @@ const pgPool = require('./database/config');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/users', (_, response) => {
-  pgPool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+app.get('/players', (_, response) => {
+  pgPool.query('SELECT * FROM players ORDER BY id ASC', (error, results) => {
     if (error) throw error;
 
     response.status(200).json(results.rows);
   });
 });
 
-app.get('/users/:id', (request, response) => {
+app.get('/players/:id', (request, response) => {
   const id = parseInt(request.params.id);
 
-  pgPool.query('SELECT * FROM users WHERE id = $1', [id], (error, result) => {
+  pgPool.query('SELECT * FROM players WHERE id = $1', [id], (error, result) => {
     if (error) throw error;
 
     response.status(200).json(result.rows);
   });
 });
 
-app.post('/user', (request, response) => {
+app.post('/player', (request, response) => {
   const name = request.body.name;
-  const email = request.body.email;
+  const club = request.body.club;
 
-  if (!name || !email) {
-    return response.status(406).send('name and email fields are mandatory');
+  if (!name || !club) {
+    return response.status(406).send('name and club fields are mandatory');
   }
 
-  const dbQuery = 'INSERT INTO users (name, email) VALUES ($1, $2)';
+  const dbQuery = 'INSERT INTO players (name, club) VALUES ($1, $2)';
 
-  pgPool.query(dbQuery, [name, email], (error, result) => {
+  pgPool.query(dbQuery, [name, club], (error) => {
     if (error) throw error;
 
-    response.status(201).json(`New User has been created successfully.`);
+    response
+      .status(201)
+      .json(`${name} has been added to records successfully.`);
   });
 });
 
-app.put('/user/:id', (request, response) => {
+app.put('/player/:id', (request, response) => {
   const id = parseInt(request.params.id);
   const name = request.body.name;
-  const email = request.body.email;
+  const club = request.body.club;
 
-  const dbQuery = 'UPDATE users SET name = $1, email = $2 WHERE id = $3';
+  const dbQuery = 'UPDATE players SET name = $1, club = $2 WHERE id = $3';
 
-  pgPool.query(dbQuery, [name, email, id], (error, result) => {
+  pgPool.query(dbQuery, [name, club, id], (error) => {
     if (error) throw error;
 
-    response.status(200).send(`User modified with ID: ${id}`);
+    response.status(200).send(`Details udpated.`);
   });
 });
 
