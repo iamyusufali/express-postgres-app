@@ -1,8 +1,21 @@
 const Pool = require('pg').Pool;
 
-const { port, user, host, database, password } = require('../config');
+const {
+  pgUser,
+  pgPassword,
+  pgHost,
+  pgPort,
+  pgDatabase,
+  nodeEnv,
+  databaseUrl,
+} = require('../config');
 
-const pool = new Pool({ user, host, database, password, port });
+const isProduction = nodeEnv === 'production';
+const connectionString = `postgresql://${pgUser}:${pgPassword}@${pgHost}:${pgPort}/${pgDatabase}`;
+
+const pool = new Pool({
+  connectionString: isProduction ? databaseUrl : connectionString,
+});
 
 const getUsers = (_, response) => {
   pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
