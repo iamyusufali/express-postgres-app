@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 
-const { serverPort } = require('./config');
-
 const dbQueries = require('./database/queries');
 
 app.use(express.json());
@@ -13,6 +11,4 @@ app.get('/users/:id', dbQueries.getUserById);
 app.post('/user', dbQueries.createNewUser);
 app.put('/user/:id', dbQueries.updateUser);
 
-app.listen(serverPort, () =>
-  console.log(`Server running at Port: ${serverPort}`)
-);
+app.listen(3000, () => console.log(`Server running at Port: ${serverPort}`));

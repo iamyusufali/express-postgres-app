@@ -12,7 +12,6 @@ module.exports = {
   pgDatabase: process.env.DB_DATABASE,
   pgUser: process.env.DB_USER,
   pgPassword: process.env.DB_PASSWORD,
-  serverPort: process.env.SERVER_PORT,
   nodeEnv: process.env.NODE_ENV,
   databaseUrl: process.env.DATABASE_URL,
 };
