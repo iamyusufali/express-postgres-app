@@ -11,4 +11,4 @@ app.get('/users/:id', dbQueries.getUserById);
 app.post('/user', dbQueries.createNewUser);
 app.put('/user/:id', dbQueries.updateUser);
 
-app.listen(3000, () => console.log(`Server running at Port: ${serverPort}`));
+app.listen(3000, () => console.log(`Server running at Port: ${3000}`));
