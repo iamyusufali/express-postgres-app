@@ -13,9 +13,16 @@ const {
 const isProduction = nodeEnv === 'production';
 const connectionString = `postgresql://${pgUser}:${pgPassword}@${pgHost}:${pgPort}/${pgDatabase}`;
 
-const pool = new Pool({
+const poolConfig = {
   connectionString: isProduction ? databaseUrl : connectionString,
-});
+  ...(isProduction && {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  }),
+};
+
+const pool = new Pool(poolConfig);
 
 const getUsers = (_, response) => {
   pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
