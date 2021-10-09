@@ -18,9 +18,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const poolConfig = {
   connectionString: process.env.DATABASE_URL,
   ...(isProduction && {
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    ssl: isProduction,
   }),
 };
 
