@@ -53,7 +53,7 @@ app.put('/player/:id', (request, response) => {
   pgPool.query(dbQuery, [name, club, id], (error) => {
     if (error) throw error;
 
-    response.status(200).send(`Details udpated.`);
+    response.status(200).send('Player details updated successfully.');
   });
 });
 
