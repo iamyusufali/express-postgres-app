@@ -70,7 +70,7 @@ Sadio Mane has been added to records successfully.
 ### 4. Update player by id
 
 ```
-Method: POST
+Method: PUT
 URL: https://express-postgres-app.herokuapp.com/player/:id
 ```
 
@@ -87,4 +87,19 @@ URL: https://express-postgres-app.herokuapp.com/player/:id
 
 ```
 Player details updated successfully.
+```
+
+### 5. Delete player by id
+
+```
+Method: DELETE
+URL: https://express-postgres-app.herokuapp.com/player/:id
+```
+
+> Response
+
+```
+
+Player with ID: :id deleted successfully.
+
 ```

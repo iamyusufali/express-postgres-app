@@ -57,6 +57,16 @@ app.put('/player/:id', (request, response) => {
   });
 });
 
+app.delete('/player/:id', (request, response) => {
+  const id = parseInt(request.params.id);
+
+  pgPool.query('DELETE FROM players WHERE id = $1', [id], (error, results) => {
+    if (error) throw error;
+
+    response.status(200).send(`Player with ID: ${id} deleted successfully.`);
+  });
+});
+
 app.listen(process.env.PORT || 3000, () =>
   console.log(`Server running at Port: ${process.env.PORT || 3000}`)
 );
