@@ -1,5 +1,7 @@
 # Express Postgres App
 
+An app created using Express and Postgres.
+
 ### API Endpoints
 
 ### 1. Get list of all players
